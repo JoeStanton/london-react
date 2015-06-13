@@ -1,4 +1,4 @@
-'use strict';
+require("babel/polyfill");
 
 var React = require('react-native');
 var {
@@ -32,19 +32,39 @@ class LondonReact extends React.Component {
 }
 
 class CurrentMeetup extends React.Component {
-  constructor() {
-    this._talks = [
-      { name: "Joe Stanton", title: "Software Engineer at Red Badger", talk: "React Native, ES6 and Concurrency" },
-      { name: "Michal Kawalec", title: "Senior Software Engineer at X-Team", talk: "fluxApp" },
-      { name: "Prospective Speaker", talk: "Speaking Slot Available" },
-    ]
+  state = {
+    attending: null
   }
+
+  talks = [
+    { name: "Joe Stanton", title: "Software Engineer at Red Badger", talk: "React Native, ES6 and Concurrency" },
+    { name: "Michal Kawalec", title: "Senior Software Engineer at X-Team", talk: "fluxApp" },
+    { name: "Prospective Speaker", talk: "Speaking Slot Available" },
+  ];
+
+  constructor() {
+    super();
+    this._fetchAttendees();
+  }
+
+  async _fetchAttendees() {
+    const apiKey = 'redacted';
+    const eventId = 223123000;
+    const url = `https://api.meetup.com/2/event/${eventId}?key=${apiKey}&sign=true&photo-host=public&page=20`;
+
+    const response = await fetch(url);
+    const json = await response.json();
+
+    this.setState({attending: json.yes_rsvp_count});
+  }
+
   render() {
     return (
       <View style={styles.emptyPage}>
         <Date date="Tuesday, June 30, 2015"/>
         <Venue name="Facebook HQ" address="10 Brock Street, Regents Place, London" />
-        <Talks talks={this._talks} />
+        <Talks talks={this.talks} />
+        <Attending count={this.state.attending} />
       </View>
     );
   }
@@ -97,6 +117,20 @@ class Talk extends React.Component {
   }
 }
 
+class Attending extends React.Component {
+  render() {
+    if(!this.props.count) {
+      return null;
+    }
+
+    return(
+      <View style={styles.section}>
+        <Text>{this.props.count} Attending</Text>
+      </View>
+    )
+  }
+}
+
 var styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -117,6 +151,9 @@ var styles = StyleSheet.create({
   talkTitle: {
     fontSize: 16,
     fontWeight: "bold"
+  },
+  attending: {
+    justifyContent: 'center'
   }
 });
 
