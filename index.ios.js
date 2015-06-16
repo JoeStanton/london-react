@@ -7,7 +7,8 @@ var {
   StatusBarIOS,
   StyleSheet,
   Text,
-  View
+  View,
+  LinkingIOS
 } = React;
 
 class LondonReact extends React.Component {
@@ -37,7 +38,7 @@ class CurrentMeetup extends React.Component {
   }
 
   talks = [
-    { name: "Joe Stanton", title: "Software Engineer at Red Badger", talk: "React Native, ES6 and Concurrency" },
+    { name: "Joe Stanton", title: "Software Engineer at Red Badger", talk: "Real World React Native & ES7" },
     { name: "Michal Kawalec", title: "Senior Software Engineer at X-Team", talk: "fluxApp" },
     { name: "Prospective Speaker", talk: "Speaking Slot Available" },
   ];
@@ -48,12 +49,16 @@ class CurrentMeetup extends React.Component {
   }
 
   async _fetchAttendees() {
-    const apiKey = 'redacted';
+    const apiKey = '696d29214c7358804e715564725a4c77';
     const eventId = 223123000;
     const url = `https://api.meetup.com/2/event/${eventId}?key=${apiKey}&sign=true&photo-host=public&page=20`;
 
-    const response = await fetch(url);
-    const json = await response.json();
+    try {
+      const response = await fetch(url);
+      const json = await response.json();
+    } catch(e) {
+      alert("Failed to fetch attendees");
+    }
 
     this.setState({attending: json.yes_rsvp_count});
   }
@@ -72,10 +77,14 @@ class CurrentMeetup extends React.Component {
 
 class Date extends React.Component {
   render() {
+    let _openCalendar = x => {
+      LinkingIOS.openURL('calshow://');
+    }
+
     return(
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Date</Text>
-        <Text>{this.props.date}</Text>
+      <View style={styles.section} onPress={_openCalendar}>
+        <Text style={styles.sectionTitle} onPress={_openCalendar}>Date</Text>
+        <Text onPress={_openCalendar}>{this.props.date}</Text>
       </View>
     );
   }
@@ -83,9 +92,13 @@ class Date extends React.Component {
 
 class Venue extends React.Component {
   render() {
+    let _openMaps = x => {
+      LinkingIOS.openURL('http://maps.apple.com/?q=' + encodeURIComponent(`${this.props.name}, ${this.props.address}`));
+    }
+
     return(
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Venue</Text>
+      <View style={styles.section} onPress={_openMaps}>
+        <Text style={styles.sectionTitle} onPress={_openMaps}>Venue</Text>
         <Text>{this.props.name}</Text>
         <Text>{this.props.address}</Text>
       </View>
