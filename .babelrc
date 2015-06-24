@@ -1,5 +1,6 @@
 {
   "whitelist": [
+    "es6.modules",
     "es6.arrowFunctions",
     "es6.blockScoping",
     "es6.classes",

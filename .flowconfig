@@ -6,6 +6,7 @@
 
 # Some modules have their own node_modules with overlap
 .*/node_modules/node-haste/.*
+.*/node_modules/react-native/Examples
 
 # Ignore react-tools where there are overlaps, but don't ignore anything that
 # react-native relies on
@@ -31,6 +32,3 @@ node_modules/react-native/Libraries/react-native/react-native-interface.js
 
 [options]
 module.system=haste
-
-[version]
-0.11.0

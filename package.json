@@ -8,5 +8,10 @@
     "babel-runtime": "^5.5.8",
     "react-native": "facebook/react-native",
     "regenerator": "^0.8.29"
+  },
+  "devDependencies": {
+    "babel-eslint": "^3.1.18",
+    "eslint": "^0.23.0",
+    "eslint-plugin-react": "^2.5.2"
   }
 }
