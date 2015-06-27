@@ -1,6 +1,6 @@
 /* @flow */
 
-import 'babel/polyfill';
+import regenerator from 'regenerator/runtime';
 import React from 'react-native';
 var {
   AppRegistry,

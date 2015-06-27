@@ -5,10 +5,8 @@
     "start": "node_modules/react-native/packager/packager.sh"
   },
   "dependencies": {
-    "babel-runtime": "^5.5.8",
-    "react-native": "facebook/react-native",
-    "regenerator": "^0.8.29"
-  },
+    "react-native": "^0.6.0"
+  }
   "devDependencies": {
     "babel-eslint": "^3.1.18",
     "eslint": "^0.23.0",
