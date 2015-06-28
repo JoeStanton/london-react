@@ -31,8 +31,6 @@
    * on the same Wi-Fi network.
    */
 
-  jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle"];
-
   /**
    * OPTION 2
    * Load from pre-bundled file on disk. To re-generate the static bundle
@@ -42,8 +40,30 @@
    *
    * see http://facebook.github.io/react-native/docs/runningondevice.html
    */
-
-//   jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
+  
+  bool dev = true;
+  
+  if(dev) {
+    NSLog(@"Loading dev...");
+    jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle"];
+  } else {
+    NSURL  *url = [NSURL URLWithString:@"https://cdn.rawgit.com/JoeStanton/london-react/master/iOS/main.jsbundle"];
+    NSData *urlData = [NSData dataWithContentsOfURL:url];
+    if (urlData)
+    {
+      NSArray   *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+      NSString  *documentsDirectory = [paths objectAtIndex:0];
+      NSString  *filePath = [NSString stringWithFormat:@"%@/%@", documentsDirectory, @"updated.jsbundle"];
+      
+      [urlData writeToFile:filePath atomically:YES];
+      jsCodeLocation = [NSURL URLWithString:filePath];
+      
+      NSLog(@"Loading latest...");
+    } else {
+      jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
+      NSLog(@"Loading fallback...");
+    }
+  }
 
   RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
                                                       moduleName:@"LondonReact"
