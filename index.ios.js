@@ -4,6 +4,7 @@ import regenerator from 'regenerator/runtime';
 import React from 'react-native';
 import Icon from 'FAKIconImage';
 import dedent from 'dedent';
+import {PureRender, Debug} from './decorators';
 
 var {
   AlertIOS,
@@ -21,7 +22,7 @@ var {
   View
 } = React;
 
-// TODO: Bind, Decorators
+// TODO: Bind
 
 class LondonReact extends React.Component {
   componentWillMount() {
@@ -124,6 +125,7 @@ class CurrentMeetup extends React.Component {
   }
 }
 
+// @PureRender / @Debug
 class Date extends React.Component {
   _openCalendar() {
     LinkingIOS.openURL('calshow://');

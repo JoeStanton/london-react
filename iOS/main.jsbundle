@@ -1073,12 +1073,13 @@ throw new TypeError(
 
 var index=findIndex.call(this,predicate,context);
 return index === -1?undefined:this[index];}});}})();
-__d('london-react/index.ios',["regenerator/runtime","react-native/Libraries/react-native/react-native","FAKIconImage","dedent/dist/dedent"],function(global, require, requireDynamic, requireLazy, module, exports) {  var _extends=Object.assign || function(target){for(var i=1;i < arguments.length;i++) {var source=arguments[i];for(var key in source) {if(Object.prototype.hasOwnProperty.call(source,key)){target[key] = source[key];}}}return target;};var _createClass=(function(){function defineProperties(target,props){for(var i=0;i < props.length;i++) {var descriptor=props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if('value' in descriptor)descriptor.writable = true;Object.defineProperty(target,descriptor.key,descriptor);}}return function(Constructor,protoProps,staticProps){if(protoProps)defineProperties(Constructor.prototype,protoProps);if(staticProps)defineProperties(Constructor,staticProps);return Constructor;};})();var _get=function get(object,property,receiver){if(object === null)object = Function.prototype;var desc=Object.getOwnPropertyDescriptor(object,property);if(desc === undefined){var parent=Object.getPrototypeOf(object);if(parent === null){return undefined;}else {return get(parent,property,receiver);}}else if('value' in desc){return desc.value;}else {var getter=desc.get;if(getter === undefined){return undefined;}return getter.call(receiver);}};function _interopRequireDefault(obj){return obj && obj.__esModule?obj:{'default':obj};}function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError('Cannot call a class as a function');}}function _inherits(subClass,superClass){if(typeof superClass !== 'function' && superClass !== null){throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype,{constructor:{value:subClass,enumerable:false,writable:true,configurable:true}});if(superClass)subClass.__proto__ = superClass;}function _taggedTemplateLiteral(strings,raw){return Object.freeze(Object.defineProperties(strings,{raw:{value:Object.freeze(raw)}}));}var _regeneratorRuntime=require(
+__d('london-react/index.ios',["regenerator/runtime","react-native/Libraries/react-native/react-native","FAKIconImage","dedent/dist/dedent","london-react/decorators"],function(global, require, requireDynamic, requireLazy, module, exports) {  var _extends=Object.assign || function(target){for(var i=1;i < arguments.length;i++) {var source=arguments[i];for(var key in source) {if(Object.prototype.hasOwnProperty.call(source,key)){target[key] = source[key];}}}return target;};var _createClass=(function(){function defineProperties(target,props){for(var i=0;i < props.length;i++) {var descriptor=props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if('value' in descriptor)descriptor.writable = true;Object.defineProperty(target,descriptor.key,descriptor);}}return function(Constructor,protoProps,staticProps){if(protoProps)defineProperties(Constructor.prototype,protoProps);if(staticProps)defineProperties(Constructor,staticProps);return Constructor;};})();var _get=function get(object,property,receiver){if(object === null)object = Function.prototype;var desc=Object.getOwnPropertyDescriptor(object,property);if(desc === undefined){var parent=Object.getPrototypeOf(object);if(parent === null){return undefined;}else {return get(parent,property,receiver);}}else if('value' in desc){return desc.value;}else {var getter=desc.get;if(getter === undefined){return undefined;}return getter.call(receiver);}};function _interopRequireDefault(obj){return obj && obj.__esModule?obj:{'default':obj};}function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError('Cannot call a class as a function');}}function _inherits(subClass,superClass){if(typeof superClass !== 'function' && superClass !== null){throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass);}subClass.prototype = Object.create(superClass && superClass.prototype,{constructor:{value:subClass,enumerable:false,writable:true,configurable:true}});if(superClass)subClass.__proto__ = superClass;}function _taggedTemplateLiteral(strings,raw){return Object.freeze(Object.defineProperties(strings,{raw:{value:Object.freeze(raw)}}));}var _regeneratorRuntime=require(
 
 'regenerator/runtime');var _regeneratorRuntime2=_interopRequireDefault(_regeneratorRuntime);var _reactNative=require(
 'react-native/Libraries/react-native/react-native');var _reactNative2=_interopRequireDefault(_reactNative);var _FAKIconImage=require(
 'FAKIconImage');var _FAKIconImage2=_interopRequireDefault(_FAKIconImage);var _dedent=require(
-'dedent/dist/dedent');var _dedent2=_interopRequireDefault(_dedent);var 
+'dedent/dist/dedent');var _dedent2=_interopRequireDefault(_dedent);var _decorators=require(
+'london-react/decorators');var 
 
 
 AlertIOS=_reactNative2.default.AlertIOS;var 
@@ -1178,7 +1179,7 @@ url,
 
 json,
 
-response;return regeneratorRuntime.async(function _fetchAttendees$(context$2$0){while(1) switch(context$2$0.prev = context$2$0.next){case 0:apiKey = undefined;eventId = 223123000;url = 'https://api.meetup.com/2/event/' + eventId + '?key=' + apiKey + '&sign=true&photo-host=public&page=20';json = undefined;context$2$0.prev = 4;context$2$0.next = 7;return regeneratorRuntime.awrap(fetch(url));case 7:response = context$2$0.sent;context$2$0.next = 10;return regeneratorRuntime.awrap(
+response;return regeneratorRuntime.async(function _fetchAttendees$(context$2$0){while(1) switch(context$2$0.prev = context$2$0.next){case 0:apiKey = '5f602651338473a5b5b223ae623b64';eventId = 223123000;url = 'https://api.meetup.com/2/event/' + eventId + '?key=' + apiKey + '&sign=true&photo-host=public&page=20';json = undefined;context$2$0.prev = 4;context$2$0.next = 7;return regeneratorRuntime.awrap(fetch(url));case 7:response = context$2$0.sent;context$2$0.next = 10;return regeneratorRuntime.awrap(
 response.json());case 10:json = context$2$0.sent;context$2$0.next = 16;break;case 13:context$2$0.prev = 13;context$2$0.t0 = context$2$0['catch'](4);
 
 AlertIOS.alert('Failed to fetch attendees');case 16:
@@ -1194,6 +1195,7 @@ _reactNative2.default.createElement(Date,{date:'Tuesday, June 30, 2015'}),
 _reactNative2.default.createElement(Venue,{name:'Facebook HQ',address:'10 Brock Street, Regents Place, London'}),
 _reactNative2.default.createElement(Talks,{talks:this.talks,navigator:this.props.navigator}),
 _reactNative2.default.createElement(Attending,{count:this.state.attending})));}}]);return CurrentMeetup;})(_reactNative2.default.Component);var 
+
 
 
 
@@ -43315,5 +43317,32 @@ join("\n");}
 
 
 module.exports = dedent;});
+__d('london-react/decorators',["react-native/Libraries/react-native/react-native"],function(global, require, requireDynamic, requireLazy, module, exports) {  Object.defineProperty(exports,'__esModule',{value:true});exports.
+
+
+
+
+
+
+
+Debug = Debug;exports.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+PureRender = PureRender;function _interopRequireDefault(obj){return obj && obj.__esModule?obj:{'default':obj};}var _reactNative=require('react-native/Libraries/react-native/react-native');var _reactNative2=_interopRequireDefault(_reactNative);function AssertReact(Component){if(!(Component.prototype instanceof _reactNative2.default.Component)){throw new Error('Specified target is not a React component.');}}function Debug(Component){AssertReact(Component);const original=Component.prototype.render;Component.prototype.render = function(){console.log('\n        Props: ' + JSON.stringify(this.props) + '\n        State: ' + JSON.stringify(this.state) + '\n      ');return original.apply(this,arguments);};return Component;}function PureRender(Component){
+AssertReact(Component);
+Component.prototype.shouldComponentUpdate = _reactNative2.default.addons.PureRenderMixin.shouldComponentUpdate;}});
 ;require("london-react/index.ios");
 //@ sourceMappingURL=/index.ios.map
