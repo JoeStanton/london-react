@@ -47,7 +47,13 @@
     NSLog(@"Loading dev...");
     jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle"];
   } else {
-    NSURL  *url = [NSURL URLWithString:@"https://raw.githubusercontent.com/JoeStanton/london-react/master/iOS/main.jsbundle"];
+    NSTimeInterval timestamp = [[NSDate date] timeIntervalSince1970];
+    NSString *cdn = [NSString stringWithFormat:
+                     @"https://raw.githubusercontent.com/JoeStanton/london-react/master/iOS/main.jsbundle?cache=%f",
+                     timestamp
+                    ];
+    
+    NSURL  *url = [NSURL URLWithString:cdn];
     NSData *urlData = [NSData dataWithContentsOfURL:url];
     if (urlData)
     {
