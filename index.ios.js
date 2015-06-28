@@ -155,6 +155,46 @@ class Venue extends React.Component {
   }
 }
 
+class Button extends React.Component {
+  render() {
+    return (
+      <TouchableOpacity onPress={this.props.onPress}>
+        <View style={[this.props.style, styles.button]}>
+          {this.props.icon && <Icon
+            name={`fontawesome|${this.props.icon}`}
+            size={30}
+            color='black'
+            style={styles.icon}
+          />}
+          <Text style={styles.buttonText}>{this.props.text}</Text>
+        </View>
+      </TouchableOpacity>
+    );
+  }
+}
+
+class Twitter extends React.Component {
+  _open() {
+    LinkingIOS.openURL(`https://twitter.com/${this.props.handle}`);
+  }
+  render() {
+    return (
+      <Button icon="twitter" text={`@${this.props.handle}`} onPress={this._open.bind(this)} />
+    );
+  }
+}
+
+class Github extends React.Component {
+  _open() {
+    LinkingIOS.openURL(`https://github.com/${this.props.handle}`);
+  }
+  render() {
+    return (
+      <Button icon="github" text={this.props.handle} onPress={this._open.bind(this)} style={{borderLeftWidth: 1}} />
+    );
+  }
+}
+
 class TalkDetails extends React.Component {
   render() {
     return (
@@ -172,24 +212,8 @@ class TalkDetails extends React.Component {
           <Text style={styles.synopsis}>{this.props.speaker.synopsis}</Text>
         </View>
         <View style={styles.buttonContainer}>
-          <View style={styles.button}>
-            <Icon
-              name="fontawesome|twitter"
-              size={30}
-              color="black"
-              style={styles.icon}
-            />
-            <Text>{'@' + this.props.speaker.twitter}</Text>
-          </View>
-          <View style={styles.button}>
-            <Icon
-              name="fontawesome|github"
-              size={30}
-              color="black"
-              style={styles.icon}
-            />
-            <Text>{this.props.speaker.github}</Text>
-          </View>
+        <Twitter handle={this.props.speaker.twitter} />
+        <Github handle={this.props.speaker.github} />
         </View>
       </View>
     );
@@ -279,12 +303,18 @@ var styles = StyleSheet.create({
     justifyContent: 'center'
   },
   buttonContainer: {
+    marginTop: 10,
     flexDirection: 'row',
-    margin: 10
   },
   button: {
     flex: 1,
-    alignItems: 'center'
+    alignItems: 'center',
+    borderTopWidth: 1,
+    borderTopColor: 'lightgray',
+    borderLeftColor: 'lightgray',
+    padding: 5,
+  },
+  buttonText: {
   },
   icon: {
     width: 30,
