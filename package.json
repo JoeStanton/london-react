@@ -5,7 +5,9 @@
     "start": "node_modules/react-native/packager/packager.sh"
   },
   "dependencies": {
-    "react-native": "^0.6.0"
+    "dedent": "^0.4.0",
+    "react-native": "^0.6.0",
+    "react-native-icons": "^0.1.0"
   },
   "devDependencies": {
     "babel-eslint": "^3.1.18",

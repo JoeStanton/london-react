@@ -2,6 +2,9 @@
 
 import regenerator from 'regenerator/runtime';
 import React from 'react-native';
+import Icon from 'FAKIconImage';
+import dedent from 'dedent';
+
 var {
   AppRegistry,
   NavigatorIOS,
@@ -9,6 +12,7 @@ var {
   StatusBarIOS,
   StyleSheet,
   Text,
+  Image,
   View,
   LinkingIOS,
   AlertIOS,
@@ -56,8 +60,30 @@ class CurrentMeetup extends React.Component {
   }
 
   talks = [
-    { name: 'Joe Stanton', title: 'Software Engineer at Red Badger', talk: 'Real World React Native & ES7' },
-    { name: 'Michal Kawalec', title: 'Senior Software Engineer at X-Team', talk: 'fluxApp' },
+    {
+      name: 'Joe Stanton',
+      title: 'Software Engineer at Red Badger',
+      bioPic: 'https://pbs.twimg.com/profile_images/560477578750738432/fCSqb4Px_400x400.png',
+      talk: 'Real World React Native & ES7',
+      synopsis: 'React Native apps are now packaged with Babel.',
+      twitter: 'joe_stant',
+      github: 'JoeStanton'
+    },
+    {
+      name: 'Michal Kawalec',
+      title: 'Senior Software Engineer at X-Team',
+      talk: 'fluxApp',
+      synopsis: dedent`
+        React has taken the web development scene by storm. It took the concepts we held dear and turned them around to make us rethink what we knew about the web. Then Flux came along to provide a valuable solution to building large scale projects.
+
+        Yet, to this day little work has been done to deliver on one of the biggest promises of React, isomorphism. A lot of boilerplate is required to seamlessly execute your components on both the server and the client. We bring a solution to the table, with a set of essential libraries. Along the way we made Flux even more awesome to enable you to focus on implementing functionality, not wheels.
+
+        So, take a seat and expect to be guided into a wonderful world, where data flows one way and your pages load in a blink of an eye.
+      `,
+      bioPic: 'https://avatars0.githubusercontent.com/u/496144?v=3&s=400',
+      twitter: 'b4zzl3',
+      github: 'mkawalec'
+    },
     { name: 'Prospective Speaker', talk: 'Speaking Slot Available', empty: true },
   ];
 
@@ -134,8 +160,36 @@ class TalkDetails extends React.Component {
     return (
       <View style={styles.emptyPage}>
         <Text>{this.props.title}</Text>
-        <View>
-          <Text>Talk not yet published</Text>
+        <View style={styles.bioContainer}>
+          <View>
+          <Image
+            style={styles.bioPic}
+            source={{uri: this.props.speaker.bioPic}}
+          />
+          </View>
+          <Text style={styles.sectionTitle}>{this.props.speaker.name}</Text>
+          <Text>{this.props.speaker.title}</Text>
+          <Text style={styles.synopsis}>{this.props.speaker.synopsis}</Text>
+        </View>
+        <View style={styles.buttonContainer}>
+          <View style={styles.button}>
+            <Icon
+              name="fontawesome|twitter"
+              size={30}
+              color="black"
+              style={styles.icon}
+            />
+            <Text>{'@' + this.props.speaker.twitter}</Text>
+          </View>
+          <View style={styles.button}>
+            <Icon
+              name="fontawesome|github"
+              size={30}
+              color="black"
+              style={styles.icon}
+            />
+            <Text>{this.props.speaker.github}</Text>
+          </View>
         </View>
       </View>
     );
@@ -212,8 +266,32 @@ var styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold'
   },
+  bioContainer: {
+    flex: 1,
+    alignItems: 'center'
+  },
+  bioPic: {
+    width: 180,
+    height: 180,
+    borderRadius: 90
+  },
   attending: {
     justifyContent: 'center'
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    margin: 10
+  },
+  button: {
+    flex: 1,
+    alignItems: 'center'
+  },
+  icon: {
+    width: 30,
+    height: 30
+  },
+  synopsis: {
+    margin: 10,
   }
 });
 
