@@ -66,7 +66,9 @@ class CurrentMeetup extends React.Component {
       bioPic: 'https://pbs.twimg.com/profile_images/560477578750738432/fCSqb4Px_400x400.png',
       talk: 'Real World React Native & ES7',
       synopsis: dedent`
-        React Native apps are now packaged with Babel.
+        React Native brings a whole new development process to mobile. We'll look at how to make use of some of the tooling built-in to React Native and how it can help you build your own apps.
+
+        We'll explore the journey taken since React Native was open sourced in March, and demonstrate some of the ES6/ES7 features such as async/await that are now usable in React Native apps thanks to Babel transpilation built right into the packager.
       `,
       twitter: 'joe_stant',
       github: 'JoeStanton'
