@@ -44,7 +44,7 @@ class LondonReact extends React.Component {
         style={styles.container}
         initialRoute={{
           component: CurrentMeetup,
-          title: 'London Hot-loading Meetup',
+          title: 'London React Meetup',
         }}
         tintColor="#7ed3f4"
         barTintColor="#1b1d24"
