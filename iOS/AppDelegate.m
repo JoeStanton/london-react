@@ -41,13 +41,13 @@
    * see http://facebook.github.io/react-native/docs/runningondevice.html
    */
   
-  bool dev = true;
+  bool dev = false;
   
   if(dev) {
     NSLog(@"Loading dev...");
     jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle"];
   } else {
-    NSURL  *url = [NSURL URLWithString:@"https://cdn.rawgit.com/JoeStanton/london-react/master/iOS/main.jsbundle"];
+    NSURL  *url = [NSURL URLWithString:@"https://raw.githubusercontent.com/JoeStanton/london-react/master/iOS/main.jsbundle"];
     NSData *urlData = [NSData dataWithContentsOfURL:url];
     if (urlData)
     {
