@@ -175,7 +175,12 @@ class Button extends React.Component {
 
 class Twitter extends React.Component {
   _open() {
-    LinkingIOS.openURL(`https://twitter.com/${this.props.handle}`);
+    const twitterAppURL = `twitter://user?screen_name=${this.props.handle}`;
+    const browserURL = `https://twitter.com/${this.props.handle}`;
+
+    LinkingIOS.canOpenURL(twitterAppURL, supported => {
+      LinkingIOS.openURL(supported ? twitterAppURL : browserURL);
+    });
   }
   render() {
     return (
