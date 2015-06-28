@@ -13,6 +13,8 @@ var {
   LinkingIOS,
   AlertIOS,
   TouchableOpacity,
+  PushNotificationIOS,
+  AsyncStorage
 } = React;
 
 // TODO: Bind, Decorators
@@ -20,8 +22,18 @@ var {
 class LondonReact extends React.Component {
   componentWillMount() {
     StatusBarIOS.setStyle('light-content');
-  }
 
+    PushNotificationIOS.addEventListener('register', this._savePushToken);
+    PushNotificationIOS.addEventListener('notification', this._notificationReceived);
+    PushNotificationIOS.requestPermissions(this._savePushToken);
+  }
+  async _savePushToken(token) {
+    await AsyncStorage.setItem('pushToken', token);
+    alert(token);
+  }
+  _notificationReceived(notification) {
+    alert(notification);
+  }
   render() {
     return (
       <NavigatorIOS
