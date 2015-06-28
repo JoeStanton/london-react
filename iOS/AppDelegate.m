@@ -41,10 +41,10 @@
    * see http://facebook.github.io/react-native/docs/runningondevice.html
    */
   
-  bool dev = false;
+  bool dev = true;
   
   if(dev) {
-    NSLog(@"Loading dev...");
+    // NSLog(@"Loading dev...");
     jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle"];
   } else {
     NSTimeInterval timestamp = [[NSDate date] timeIntervalSince1970];
@@ -64,10 +64,10 @@
       [urlData writeToFile:filePath atomically:YES];
       jsCodeLocation = [NSURL URLWithString:filePath];
       
-      NSLog(@"Loading latest...");
+      // NSLog(@"Loading latest...");
     } else {
       jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
-      NSLog(@"Loading fallback...");
+      // NSLog(@"Loading fallback...");
     }
   }
 
