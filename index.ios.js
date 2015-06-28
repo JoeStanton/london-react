@@ -6,19 +6,19 @@ import Icon from 'FAKIconImage';
 import dedent from 'dedent';
 
 var {
+  AlertIOS,
   AppRegistry,
+  AsyncStorage,
+  Image,
+  LinkingIOS,
   NavigatorIOS,
-  Navigator,
+  PushNotificationIOS,
+  ScrollView,
   StatusBarIOS,
   StyleSheet,
   Text,
-  Image,
-  View,
-  LinkingIOS,
-  AlertIOS,
   TouchableOpacity,
-  PushNotificationIOS,
-  AsyncStorage
+  View
 } = React;
 
 // TODO: Bind, Decorators
@@ -39,9 +39,6 @@ class LondonReact extends React.Component {
     alert(notification);
   }
   render() {
-    let blue = '#7ed3f4';
-    let white = '#ffffff';
-
     return (
       <NavigatorIOS
         style={styles.container}
@@ -49,9 +46,9 @@ class LondonReact extends React.Component {
           component: CurrentMeetup,
           title: 'London React Meetup',
         }}
-        tintColor={blue}
+        tintColor="#7ed3f4"
         barTintColor="#1b1d24"
-        titleTextColor={white}
+        titleTextColor="#ffffff"
       />
     );
   }
@@ -206,24 +203,24 @@ class Github extends React.Component {
 class TalkDetails extends React.Component {
   render() {
     return (
-      <View style={styles.emptyPage}>
-        <StyledText>{this.props.title}</StyledText>
-        <View style={styles.bioContainer}>
-          <View>
-          <Image
-            style={styles.bioPic}
-            source={{uri: this.props.speaker.bioPic}}
-          />
+        <View style={styles.emptyPage}>
+          <StyledText>{this.props.title}</StyledText>
+          <View style={styles.bioContainer}>
+            <View>
+            <Image
+              style={styles.bioPic}
+              source={{uri: this.props.speaker.bioPic}}
+            />
+            </View>
+            <StyledText style={styles.sectionTitle}>{this.props.speaker.name}</StyledText>
+            <StyledText>{this.props.speaker.title}</StyledText>
+            <StyledText style={styles.synopsis} numberOfLines={16}>{this.props.speaker.synopsis}</StyledText>
           </View>
-          <StyledText style={styles.sectionTitle}>{this.props.speaker.name}</StyledText>
-          <StyledText>{this.props.speaker.title}</StyledText>
-          <StyledText style={styles.synopsis}>{this.props.speaker.synopsis}</StyledText>
+          <View style={styles.buttonContainer}>
+          <Twitter handle={this.props.speaker.twitter} />
+          <Github handle={this.props.speaker.github} />
+          </View>
         </View>
-        <View style={styles.buttonContainer}>
-        <Twitter handle={this.props.speaker.twitter} />
-        <Github handle={this.props.speaker.github} />
-        </View>
-      </View>
     );
   }
 }
