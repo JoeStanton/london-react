@@ -39,6 +39,9 @@ class LondonReact extends React.Component {
     alert(notification);
   }
   render() {
+    let blue = '#7ed3f4';
+    let white = '#ffffff';
+
     return (
       <NavigatorIOS
         style={styles.container}
@@ -46,9 +49,9 @@ class LondonReact extends React.Component {
           component: CurrentMeetup,
           title: 'London React Meetup',
         }}
-        tintColor="#FFFFFF"
-        barTintColor="#be1414"
-        titleTextColor="#FFFFFF"
+        tintColor={blue}
+        barTintColor="#1b1d24"
+        titleTextColor={white}
       />
     );
   }
@@ -65,7 +68,9 @@ class CurrentMeetup extends React.Component {
       title: 'Software Engineer at Red Badger',
       bioPic: 'https://pbs.twimg.com/profile_images/560477578750738432/fCSqb4Px_400x400.png',
       talk: 'Real World React Native & ES7',
-      synopsis: 'React Native apps are now packaged with Babel.',
+      synopsis: dedent`
+        React Native apps are now packaged with Babel.
+      `,
       twitter: 'joe_stant',
       github: 'JoeStanton'
     },
@@ -121,16 +126,15 @@ class CurrentMeetup extends React.Component {
 }
 
 class Date extends React.Component {
+  _openCalendar() {
+    LinkingIOS.openURL('calshow://');
+  }
   render() {
-    let _openCalendar = x => {
-      LinkingIOS.openURL('calshow://');
-    };
-
     return (
-      <TouchableOpacity onPress={this.props.onPress}>
-        <View style={styles.section} onPress={_openCalendar}>
-          <Text style={styles.sectionTitle} onPress={_openCalendar}>Date</Text>
-          <Text onPress={_openCalendar}>{this.props.date}</Text>
+      <TouchableOpacity onPress={this._openCalendar.bind(this)}>
+        <View style={styles.section} onPress={this._openCalendar}>
+          <AppText style={styles.sectionTitle}>Date</AppText>
+          <AppText>{this.props.date}</AppText>
         </View>
       </TouchableOpacity>
     );
@@ -138,17 +142,16 @@ class Date extends React.Component {
 }
 
 class Venue extends React.Component {
+  _openMaps() {
+    LinkingIOS.openURL('http://maps.apple.com/?q=' + encodeURIComponent(`${this.props.name}, ${this.props.address}`));
+  }
   render() {
-    let _openMaps = x => {
-      LinkingIOS.openURL('http://maps.apple.com/?q=' + encodeURIComponent(`${this.props.name}, ${this.props.address}`));
-    };
-
     return (
-      <TouchableOpacity onPress={_openMaps}>
+      <TouchableOpacity onPress={this._openMaps.bind(this)}>
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Venue</Text>
-          <Text>{this.props.name}</Text>
-          <Text>{this.props.address}</Text>
+          <AppText style={styles.sectionTitle}>Venue</AppText>
+          <AppText>{this.props.name}</AppText>
+          <AppText>{this.props.address}</AppText>
         </View>
       </TouchableOpacity>
     );
@@ -163,10 +166,10 @@ class Button extends React.Component {
           {this.props.icon && <Icon
             name={`fontawesome|${this.props.icon}`}
             size={30}
-            color='black'
+            color="rgba(255, 255, 255, 0.8)"
             style={styles.icon}
           />}
-          <Text style={styles.buttonText}>{this.props.text}</Text>
+          <AppText style={styles.buttonText}>{this.props.text}</AppText>
         </View>
       </TouchableOpacity>
     );
@@ -204,7 +207,7 @@ class TalkDetails extends React.Component {
   render() {
     return (
       <View style={styles.emptyPage}>
-        <Text>{this.props.title}</Text>
+        <AppText>{this.props.title}</AppText>
         <View style={styles.bioContainer}>
           <View>
           <Image
@@ -212,9 +215,9 @@ class TalkDetails extends React.Component {
             source={{uri: this.props.speaker.bioPic}}
           />
           </View>
-          <Text style={styles.sectionTitle}>{this.props.speaker.name}</Text>
-          <Text>{this.props.speaker.title}</Text>
-          <Text style={styles.synopsis}>{this.props.speaker.synopsis}</Text>
+          <AppText style={styles.sectionTitle}>{this.props.speaker.name}</AppText>
+          <AppText>{this.props.speaker.title}</AppText>
+          <AppText style={styles.synopsis}>{this.props.speaker.synopsis}</AppText>
         </View>
         <View style={styles.buttonContainer}>
         <Twitter handle={this.props.speaker.twitter} />
@@ -228,8 +231,8 @@ class TalkDetails extends React.Component {
 class Talks extends React.Component {
   render() {
     return (
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Talks</Text>
+      <View style={[styles.section, {flex: 1}]}>
+        <AppText style={styles.sectionTitle}>Talks</AppText>
         {this.props.talks.map(speaker => <Talk speaker={speaker} navigator={this.props.navigator} />)}
       </View>
      );
@@ -250,10 +253,10 @@ class Talk extends React.Component {
     const {speaker} = this.props;
     return (
       <TouchableOpacity onPress={this._talkDetails.bind(this)}>
-        <View style={styles.section}>
-            <Text style={styles.talkTitle}>{speaker.talk}</Text>
-            <Text>{speaker.name}</Text>
-            <Text>{speaker.title}</Text>
+        <View style={styles.talk}>
+            <AppText style={styles.talkTitle}>{speaker.talk}</AppText>
+            <AppText>{speaker.name}</AppText>
+            <AppText>{speaker.title}</AppText>
         </View>
       </TouchableOpacity>
      );
@@ -262,14 +265,18 @@ class Talk extends React.Component {
 
 class Attending extends React.Component {
   render() {
-    if (!this.props.count) {
-      return null;
-    }
-
     return (
-      <View style={styles.section}>
-        <Text>{this.props.count} Attending</Text>
+      <View style={[styles.section, {borderBottomWidth: 0}]}>
+        <AppText>{this.props.count ? `${this.props.count} Attending` : 'Loading...'}</AppText>
       </View>
+    );
+  }
+}
+
+class AppText extends React.Component {
+  render() {
+    return (
+      <Text {...this.props} style={[styles.text, this.props.style]}/>
     );
   }
 }
@@ -277,23 +284,36 @@ class Attending extends React.Component {
 var styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#1b1d24'
+  },
+  text: {
+    color: 'white'
   },
   emptyPage: {
     flex: 1,
     paddingTop: 64,
+    backgroundColor: '#1b1d24',
   },
   emptyPageText: {
     margin: 10,
   },
   section: {
-    margin: 10,
+    marginLeft: 20,
+    marginRight: 20,
+    padding: 20,
+    borderBottomWidth: 1,
+    borderColor: '#484848'
+  },
+  talk: {
+    paddingTop: 20,
+    paddingBottom: 10
   },
   sectionTitle: {
-    fontSize: 20
+    fontSize: 20,
   },
   talkTitle: {
     fontSize: 16,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
   bioContainer: {
     flex: 1,
@@ -302,7 +322,9 @@ var styles = StyleSheet.create({
   bioPic: {
     width: 180,
     height: 180,
-    borderRadius: 90
+    borderRadius: 90,
+    borderColor: 'white',
+    borderWidth: 3
   },
   attending: {
     justifyContent: 'center'
@@ -315,11 +337,12 @@ var styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     borderTopWidth: 1,
-    borderTopColor: 'lightgray',
-    borderLeftColor: 'lightgray',
+    borderTopColor: 'rgba(255, 255, 255, 0.2)',
+    borderLeftColor: 'rgba(255, 255, 255, 0.2)',
     padding: 5,
   },
   buttonText: {
+    color: 'rgba(255, 255, 255, 0.8)'
   },
   icon: {
     width: 30,
