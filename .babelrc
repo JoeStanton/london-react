@@ -16,6 +16,7 @@
     "react",
     "es7.classProperties",
     "es7.asyncFunctions",
-    "regenerator"
+    "regenerator",
+    "utility.inlineEnvironmentVariables"
   ]
 }

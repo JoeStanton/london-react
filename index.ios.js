@@ -55,7 +55,7 @@ class CurrentMeetup extends React.Component {
   }
 
   async _fetchAttendees() {
-    const apiKey = process.env.MEETUP_API_KEY
+    const apiKey = process.env.MEETUP_API_KEY;
     const eventId = 223123000;
     const url = `https://api.meetup.com/2/event/${eventId}?key=${apiKey}&sign=true&photo-host=public&page=20`;
 
