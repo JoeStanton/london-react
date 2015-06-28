@@ -133,8 +133,8 @@ class Date extends React.Component {
     return (
       <TouchableOpacity onPress={this._openCalendar.bind(this)}>
         <View style={styles.section} onPress={this._openCalendar}>
-          <AppText style={styles.sectionTitle}>Date</AppText>
-          <AppText>{this.props.date}</AppText>
+          <StyledText style={styles.sectionTitle}>Date</StyledText>
+          <StyledText>{this.props.date}</StyledText>
         </View>
       </TouchableOpacity>
     );
@@ -149,9 +149,9 @@ class Venue extends React.Component {
     return (
       <TouchableOpacity onPress={this._openMaps.bind(this)}>
         <View style={styles.section}>
-          <AppText style={styles.sectionTitle}>Venue</AppText>
-          <AppText>{this.props.name}</AppText>
-          <AppText>{this.props.address}</AppText>
+          <StyledText style={styles.sectionTitle}>Venue</StyledText>
+          <StyledText>{this.props.name}</StyledText>
+          <StyledText>{this.props.address}</StyledText>
         </View>
       </TouchableOpacity>
     );
@@ -169,7 +169,7 @@ class Button extends React.Component {
             color="rgba(255, 255, 255, 0.8)"
             style={styles.icon}
           />}
-          <AppText style={styles.buttonText}>{this.props.text}</AppText>
+          <StyledText style={styles.buttonText}>{this.props.text}</StyledText>
         </View>
       </TouchableOpacity>
     );
@@ -207,7 +207,7 @@ class TalkDetails extends React.Component {
   render() {
     return (
       <View style={styles.emptyPage}>
-        <AppText>{this.props.title}</AppText>
+        <StyledText>{this.props.title}</StyledText>
         <View style={styles.bioContainer}>
           <View>
           <Image
@@ -215,9 +215,9 @@ class TalkDetails extends React.Component {
             source={{uri: this.props.speaker.bioPic}}
           />
           </View>
-          <AppText style={styles.sectionTitle}>{this.props.speaker.name}</AppText>
-          <AppText>{this.props.speaker.title}</AppText>
-          <AppText style={styles.synopsis}>{this.props.speaker.synopsis}</AppText>
+          <StyledText style={styles.sectionTitle}>{this.props.speaker.name}</StyledText>
+          <StyledText>{this.props.speaker.title}</StyledText>
+          <StyledText style={styles.synopsis}>{this.props.speaker.synopsis}</StyledText>
         </View>
         <View style={styles.buttonContainer}>
         <Twitter handle={this.props.speaker.twitter} />
@@ -232,7 +232,7 @@ class Talks extends React.Component {
   render() {
     return (
       <View style={[styles.section, {flex: 1}]}>
-        <AppText style={styles.sectionTitle}>Talks</AppText>
+        <StyledText style={styles.sectionTitle}>Talks</StyledText>
         {this.props.talks.map(speaker => <Talk speaker={speaker} navigator={this.props.navigator} />)}
       </View>
      );
@@ -254,9 +254,9 @@ class Talk extends React.Component {
     return (
       <TouchableOpacity onPress={this._talkDetails.bind(this)}>
         <View style={styles.talk}>
-            <AppText style={styles.talkTitle}>{speaker.talk}</AppText>
-            <AppText>{speaker.name}</AppText>
-            <AppText>{speaker.title}</AppText>
+            <StyledText style={styles.talkTitle}>{speaker.talk}</StyledText>
+            <StyledText>{speaker.name}</StyledText>
+            <StyledText>{speaker.title}</StyledText>
         </View>
       </TouchableOpacity>
      );
@@ -267,13 +267,13 @@ class Attending extends React.Component {
   render() {
     return (
       <View style={[styles.section, {borderBottomWidth: 0}]}>
-        <AppText>{this.props.count ? `${this.props.count} Attending` : 'Loading...'}</AppText>
+        <StyledText>{this.props.count ? `${this.props.count} Attending` : 'Loading...'}</StyledText>
       </View>
     );
   }
 }
 
-class AppText extends React.Component {
+class StyledText extends React.Component {
   render() {
     return (
       <Text {...this.props} style={[styles.text, this.props.style]}/>
