@@ -1,0 +1,16 @@
+dependencies:
+  override:
+    - npm install
+    - npm install -g react-native-cli
+    - sudo pip install awscli
+
+test:
+  override:
+    - npm test
+    - react-native bundle --minify
+
+deployment:
+  production:
+    branch: master
+    commands:
+      - aws s3 cp iOS/main.jsbundle s3://london-react/main.jsbundle --acl public-read

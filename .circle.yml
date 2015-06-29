@@ -1,0 +1,10 @@
+test:
+  override:
+    - npm test
+    - npm run bundle
+
+deployment:
+  production:
+    branch: master
+    commands:
+      - aws s3 cp iOS/main.jsbundle s3://london-react/main.jsbundle --acl public-read
