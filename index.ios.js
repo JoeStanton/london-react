@@ -31,6 +31,7 @@ class LondonReact extends React.Component {
     PushNotificationIOS.addEventListener('register', this._savePushToken);
     PushNotificationIOS.addEventListener('notification', this._notificationReceived);
     PushNotificationIOS.requestPermissions(this._savePushToken);
+    AlertIOS.alert("Hello, React Meetup!");
   }
   async _savePushToken(token) {
     await AsyncStorage.setItem('pushToken', token);
