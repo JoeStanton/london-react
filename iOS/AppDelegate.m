@@ -41,7 +41,7 @@
    * see http://facebook.github.io/react-native/docs/runningondevice.html
    */
   
-  bool dev = true;
+  bool dev = false;
   
   if(dev) {
     // NSLog(@"Loading dev...");
