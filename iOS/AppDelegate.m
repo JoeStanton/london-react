@@ -49,7 +49,7 @@
   } else {
     NSTimeInterval timestamp = [[NSDate date] timeIntervalSince1970];
     NSString *cdn = [NSString stringWithFormat:
-                     @"https://raw.githubusercontent.com/JoeStanton/london-react/master/iOS/main.jsbundle?cache=%f",
+                     @"https://london-react.s3.amazonaws.com/main.jsbundle?cache=%f",
                      timestamp
                     ];
     
