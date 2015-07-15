@@ -31,11 +31,12 @@ class LondonReact extends React.Component {
 
     PushNotificationIOS.addEventListener('register', this._savePushToken);
     PushNotificationIOS.addEventListener('notification', this._notificationReceived);
-    PushNotificationIOS.requestPermissions(this._savePushToken);
+    PushNotificationIOS.requestPermissions();
   }
   async _savePushToken(token) {
     await AsyncStorage.setItem('pushToken', token);
     await Parse.registerInstallation(token);
+    AlertIOS.alert(`Registered token: ${token}`);
   }
   async _registerInstallation() {
     let pushToken = await AsyncStorage.getItem('pushToken');
