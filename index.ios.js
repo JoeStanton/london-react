@@ -4,7 +4,7 @@ import regenerator from 'regenerator/runtime';
 import React from 'react-native';
 import Icon from 'FAKIconImage';
 import dedent from 'dedent';
-import {PureRender, Debug} from './decorators';
+import Parse from './parse';
 
 var {
   AlertIOS,
@@ -25,8 +25,13 @@ var {
 // TODO: Bind
 
 class LondonReact extends React.Component {
-  componentWillMount() {
+  async componentWillMount() {
     StatusBarIOS.setStyle('light-content');
+
+    let pushToken = await AsyncStorage.getItem('pushToken');
+    if (pushToken) {
+      await Parse.registerInstallation(pushToken);
+    }
 
     PushNotificationIOS.addEventListener('register', this._savePushToken);
     PushNotificationIOS.addEventListener('notification', this._notificationReceived);
@@ -34,10 +39,10 @@ class LondonReact extends React.Component {
   }
   async _savePushToken(token) {
     await AsyncStorage.setItem('pushToken', token);
-    alert(token);
+    await Parse.registerInstallation(token);
   }
   _notificationReceived(notification) {
-    alert(notification);
+    AlertIOS.alert(notification);
   }
   render() {
     return (
