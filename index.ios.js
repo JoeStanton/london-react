@@ -27,11 +27,7 @@ var {
 class LondonReact extends React.Component {
   async componentWillMount() {
     StatusBarIOS.setStyle('light-content');
-
-    let pushToken = await AsyncStorage.getItem('pushToken');
-    if (pushToken) {
-      await Parse.registerInstallation(pushToken);
-    }
+    await this._registerInstallation();
 
     PushNotificationIOS.addEventListener('register', this._savePushToken);
     PushNotificationIOS.addEventListener('notification', this._notificationReceived);
@@ -40,6 +36,15 @@ class LondonReact extends React.Component {
   async _savePushToken(token) {
     await AsyncStorage.setItem('pushToken', token);
     await Parse.registerInstallation(token);
+  }
+  async _registerInstallation() {
+    let pushToken = await AsyncStorage.getItem('pushToken');
+    try {
+      if (!pushToken) { throw new Error('No push token found'); }
+      return await Parse.registerInstallation(pushToken);
+    } catch (e) {
+      AlertIOS.alert(`Unable to register installation. ${e}`);
+    }
   }
   _notificationReceived(notification) {
     AlertIOS.alert(notification);
