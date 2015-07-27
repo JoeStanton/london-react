@@ -39,8 +39,8 @@ class LondonReact extends React.Component {
   }
   async _registerInstallation() {
     let pushToken = await AsyncStorage.getItem('pushToken');
+    if (!pushToken) { return; }
     try {
-      if (!pushToken) { throw new Error('No push token found'); }
       return await Parse.registerInstallation(pushToken);
     } catch (e) {
       AlertIOS.alert(`Unable to register installation. ${e}`);
