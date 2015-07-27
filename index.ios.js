@@ -72,32 +72,26 @@ class CurrentMeetup extends React.Component {
 
   talks = [
     {
-      name: 'Joe Stanton',
-      title: 'Software Engineer at Red Badger',
-      bioPic: 'https://pbs.twimg.com/profile_images/560477578750738432/fCSqb4Px_400x400.png',
-      talk: 'Real World React Native & ES7',
+      name: 'Yacine Rezgui',
+      title: 'Import.io',
+      talk: 'Live coding with Native modules ',
       synopsis: dedent`
-        React Native brings a whole new development process to mobile. We'll look at how to make use of some of the tooling built-in to React Native and how it can help you build your own apps.
-
-        We'll explore the journey taken since React Native was open sourced in March, and demonstrate some of the ES6/ES7 features such as async/await that are now usable in React Native apps thanks to Babel transpilation built right into the packager.
+        Yacine will create a small application that uses the microphone to do speech to text with a native module communicating to the React code (iOS).
       `,
-      twitter: 'joe_stant',
-      github: 'JoeStanton'
+      bioPic: 'https://pbs.twimg.com/profile_images/533643942131425280/PZbS9agy.jpeg',
+      twitter: 'yrezgui',
+      github: 'yrezgui'
     },
     {
-      name: 'Michal Kawalec',
-      title: 'Senior Software Engineer at X-Team',
-      talk: 'fluxApp',
+      name: 'Viktor Charypar',
+      title: 'Red Badger',
+      talk: 'GraphQL at The Financial Times',
       synopsis: dedent`
-        React has taken the web development scene by storm. It took the concepts we held dear and turned them around to make us rethink what we knew about the web. Then Flux came along to provide a valuable solution to building large scale projects.
-
-        Yet, to this day little work has been done to deliver on one of the biggest promises of React, isomorphism. A lot of boilerplate is required to seamlessly execute your components on both the server and the client. We bring a solution to the table, with a set of essential libraries. Along the way we made Flux even more awesome to enable you to focus on implementing functionality, not wheels.
-
-        So, take a seat and expect to be guided into a wonderful world, where data flows one way and your pages load in a blink of an eye.
+        Recently released by Facebook, GraphQL isn't only useful for client-server communication. Viktor will show how Red Badger used the reference implementation - graphql-js - at theFinancial Times as a generic data presentation layer over a set of backend APIs and how to deal with related requirements like caching or authorisation.
       `,
-      bioPic: 'https://avatars0.githubusercontent.com/u/496144?v=3&s=400',
-      twitter: 'b4zzl3',
-      github: 'mkawalec'
+      bioPic: 'https://pbs.twimg.com/profile_images/567296628315267073/BKibFa5T_400x400.jpeg',
+      twitter: 'charypar',
+      github: 'charypar'
     },
     { name: 'Prospective Speaker', talk: 'Speaking Slot Available', empty: true },
   ];
@@ -126,7 +120,7 @@ class CurrentMeetup extends React.Component {
   render() {
     return (
       <View style={styles.emptyPage}>
-        <Date date="Tuesday, June 30, 2015" />
+        <Date date="Tuesday, August 4, 2015" />
         <Venue name="Facebook HQ" address="10 Brock Street, Regents Place, London" />
         <Talks talks={this.talks} navigator={this.props.navigator} />
         <Attending count={this.state.attending} />

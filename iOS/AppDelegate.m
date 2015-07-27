@@ -40,9 +40,9 @@
    *
    * see http://facebook.github.io/react-native/docs/runningondevice.html
    */
-  
+
   bool dev = false;
-  
+
   if(dev) {
     // NSLog(@"Loading dev...");
     jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle"];
@@ -52,7 +52,7 @@
                      @"https://london-react.s3.amazonaws.com/main.jsbundle?cache=%f",
                      timestamp
                     ];
-    
+
     NSURL  *url = [NSURL URLWithString:cdn];
     NSData *urlData = [NSData dataWithContentsOfURL:url];
     if (urlData)
@@ -60,10 +60,10 @@
       NSArray   *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
       NSString  *documentsDirectory = [paths objectAtIndex:0];
       NSString  *filePath = [NSString stringWithFormat:@"%@/%@", documentsDirectory, @"updated.jsbundle"];
-      
+
       [urlData writeToFile:filePath atomically:YES];
       jsCodeLocation = [NSURL URLWithString:filePath];
-      
+
       // NSLog(@"Loading latest...");
     } else {
       jsCodeLocation = [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
