@@ -14,7 +14,6 @@ var {
   LinkingIOS,
   NavigatorIOS,
   PushNotificationIOS,
-  ScrollView,
   StatusBarIOS,
   StyleSheet,
   Text,
@@ -25,9 +24,8 @@ var {
 // TODO: Bind
 
 class LondonReact extends React.Component {
-  async componentWillMount() {
+  componentWillMount() {
     StatusBarIOS.setStyle('light-content');
-    await this._registerInstallation();
 
     PushNotificationIOS.addEventListener('register', this._savePushToken);
     PushNotificationIOS.addEventListener('notification', this._notificationReceived);
@@ -39,7 +37,6 @@ class LondonReact extends React.Component {
   }
   async _registerInstallation() {
     let pushToken = await AsyncStorage.getItem('pushToken');
-    if (!pushToken) { return; }
     try {
       return await Parse.registerInstallation(pushToken);
     } catch (e) {
@@ -103,7 +100,7 @@ class CurrentMeetup extends React.Component {
 
   async _fetchAttendees() {
     const apiKey = process.env.MEETUP_API_KEY;
-    const eventId = 223123000;
+    const eventId = 224090322;
     const url = `https://api.meetup.com/2/event/${eventId}?key=${apiKey}&sign=true&photo-host=public&page=20`;
 
     let json;
