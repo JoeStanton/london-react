@@ -1,5 +1,6 @@
 /* @flow */
 
+import bugsnag from './bugsnag-native';
 import regenerator from 'regenerator/runtime';
 import React from 'react-native';
 import Icon from 'FAKIconImage';
@@ -20,6 +21,8 @@ var {
   TouchableOpacity,
   View
 } = React;
+
+ErrorUtils.setGlobalHandler(error => bugsnag.notify(error));
 
 // TODO: Bind
 
