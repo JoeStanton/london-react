@@ -670,6 +670,7 @@
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: David Wynne (WVKX278G5W)";
@@ -683,12 +684,14 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = LondonReact;
 				PROVISIONING_PROFILE = "d8f23040-5086-4316-ace8-ba8530e55286";
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/node_modules/react-native/Libraries/**";
 			};
 			name = Debug;
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: David Wynne (WVKX278G5W)";
@@ -702,6 +705,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = LondonReact;
 				PROVISIONING_PROFILE = "d8f23040-5086-4316-ace8-ba8530e55286";
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/node_modules/react-native/Libraries/**";
 			};
 			name = Release;
 		};
